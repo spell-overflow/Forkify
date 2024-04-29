@@ -12,20 +12,30 @@ const timeout = function (s) {
 
 ///////////////////////////////////////
 
-const toJadenCase = function (str) {
-  const newStr = str
-    .split(' ')
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-    .join(' ');
-  return newStr;
-};
-console.log(toJadenCase1('ich bin eine nuss'));
+const showRecipe = async function () {
+  try {
+    const res = await fetch(
+      // 'https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bc886'
+      'https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604691c37cdc054bd0d4'
+    );
+    const data = await res.json();
 
-String.prototype.toJadenCase = function (str) {
-  const newStr = str
-    .split(' ')
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-    .join(' ');
-  return newStr;
+    if (!res.ok) throw new Error(`${data.message} (${res.status})`);
+
+    let { recipe } = data.data;
+    recipe = {
+      id: recipe.id,
+      title: recipe.title,
+      publisher: recipe.publisher,
+      sourceUrl: recipe.sourc_url,
+      image: recipe.image_url,
+      servings: recipe.servings,
+      cookingTime: recipe.cooking_time,
+      ingredients: recipe.ingredients,
+    };
+    console.log(recipe);
+  } catch (err) {
+    alert(err);
+  }
 };
-console.log(toJadenCase1('ich bin eine nuss'));
+showRecipe();
