@@ -23,7 +23,7 @@ const controlRecipes = async function () {
     // h2 2) rendering recipe
     recipeView.render(model.state.recipe); // data from ln above is put into the render-method in recipeView.js
   } catch (err) {
-    alert(err);
+    recipeView.renderError();
   }
 };
 controlRecipes();
