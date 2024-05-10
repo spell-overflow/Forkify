@@ -1,14 +1,16 @@
 import { async } from 'regenerator-runtime';
-import { API_URL } from './config.js';
+import { API_URL, RES_PER_PAGE } from './config.js';
 import { getJSON } from './helpers.js';
 // import { keyFor } from 'core-js/fn/symbol';
 
 // h1 state-object
 export const state = {
   recipe: {},
-  serach: {
+  search: {
     query: '',
     results: [],
+    resultsPerPage: RES_PER_PAGE,
+    page: 1,
   },
 };
 
@@ -36,11 +38,10 @@ export const loadRecipe = async function (id) {
 
 export const loadSearchResults = async function (query) {
   try {
-    state.serach.query = query;
+    state.search.query = query;
     const data = await getJSON(`${API_URL}?search=${query}`);
-    console.log(data);
 
-    state.serach.results = data.data.recipes.map(rec => {
+    state.search.results = data.data.recipes.map(rec => {
       return {
         id: rec.id,
         title: rec.title,
@@ -53,4 +54,11 @@ export const loadSearchResults = async function (query) {
     console.error(`${err} 💣💣💣`);
     throw err;
   }
+};
+
+export const getSearchResultsPage = function (page = state.search.page) {
+  state.search.page = page;
+  const start = (page - 1) * state.search.resultsPerPage; // 0
+  const end = page * state.search.resultsPerPage; //9 (we can use 10 here bc slice does not include the second parameter)
+  return state.search.results.slice(start, end);
 };
