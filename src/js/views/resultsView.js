@@ -24,6 +24,10 @@ class ResultsView extends View {
             </div>
             </a>
         </li>
+
+        <span class="recipe__info-data recipe__info-data--people">4</span>
+
+    
     `;
   }
 }

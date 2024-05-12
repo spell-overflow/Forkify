@@ -11,8 +11,6 @@ import 'regenerator-runtime/runtime';
 //   module.hot.accept();
 // }
 
-console.log(model.state.recipe);
-
 const controlRecipes = async function () {
   try {
     const id = window.location.hash.slice(1);
@@ -22,7 +20,6 @@ const controlRecipes = async function () {
 
     // h2 1) loading recipe
     await model.loadRecipe(id);
-
     // h2 2) rendering recipe
     recipeView.render(model.state.recipe);
   } catch (err) {
