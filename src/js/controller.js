@@ -11,6 +11,8 @@ import 'regenerator-runtime/runtime';
 //   module.hot.accept();
 // }
 
+console.log(model.state.recipe);
+
 const controlRecipes = async function () {
   try {
     const id = window.location.hash.slice(1);
@@ -57,9 +59,17 @@ const controlPagination = function (goToPage) {
   paginationView.render(model.state.search);
 };
 
+const controlServings = function () {
+  // Update recipe servings (in state)
+  model.updateServings(5);
+  // Update recipe view
+  recipeView.render(model.state.recipe);
+};
+
 const init = function () {
   // subscriber
   recipeView.addHandlerRender(controlRecipes);
+  recipeView.addHandlerServings(controlServings);
   searchView.addHandlerSearch(controlSearchResults);
   paginationView.addHandlerClick(controlPagination);
 };

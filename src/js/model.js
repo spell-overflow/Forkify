@@ -29,6 +29,7 @@ export const loadRecipe = async function (id) {
       cookingTime: recipe.cooking_time,
       ingredients: recipe.ingredients,
     };
+    console.log(state.recipe);
   } catch (err) {
     // temp error handler
     console.error(`${err} 💣💣`);
@@ -61,4 +62,12 @@ export const getSearchResultsPage = function (page = state.search.page) {
   const start = (page - 1) * state.search.resultsPerPage; // 0
   const end = page * state.search.resultsPerPage; //9 (we can use 10 here bc slice does not include the second parameter)
   return state.search.results.slice(start, end);
+};
+export const updateServings = function (newServings) {
+  state.recipe.ingredients.forEach(ing => {
+    // newQt = oldQt * newServings / oldServings
+    ing.quantity = (ing.quantity * newServings) / state.recipe.servings;
+  });
+
+  state.recipe.servings = newServings;
 };
