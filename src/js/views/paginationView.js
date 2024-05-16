@@ -20,11 +20,9 @@ class PaginationView extends View {
 
   _generateMarkup() {
     const currPage = this._data.page;
-    console.log(typeof currPage);
     const numPages = Math.ceil(
       this._data.results.length / this._data.resultsPerPage
     );
-    console.log(numPages);
 
     const generateMarkupBtnPrev = `
         <button data-goto="${
