@@ -49,6 +49,7 @@ export const loadSearchResults = async function (query) {
         image: rec.image_url,
       };
     });
+    state.search.page = 1;
     // const data = await getJSON(`https://forkify-api.herokuapp.com/api/v2/recipes?search=pizza`)
   } catch (err) {
     console.error(`${err} 💣💣💣`);
