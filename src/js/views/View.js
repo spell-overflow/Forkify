@@ -78,16 +78,15 @@ export default class View {
   renderMessage(message = this._message) {
     const markup = `
         <div class="message">
-            <div class="message">
                 <div>
                     <svg>
                         <use href="${icons}#icon-smile"></use>
                 </svg>
             </div>
-            <p>Start by searching for a recipe or an ingredient. Have fun!</p>
+            <p>${message}</p>
         </div>`;
 
-    this._clear;
+    this._clear();
     this._parentElement.insertAdjacentHTML('afterbegin', markup);
   }
 }

@@ -2,8 +2,9 @@
 import View from './View.js';
 import icons from 'url:../../img/icons.svg';
 
-class addRecipeView extends View {
+class AddRecipeView extends View {
   _parentElement = document.querySelector('.upload');
+  _message = 'Recipe was successfully uploaded. 🔮';
 
   _window = document.querySelector('.add-recipe-window');
   _overlay = document.querySelector('.overlay');
@@ -33,7 +34,7 @@ class addRecipeView extends View {
   addHandlerUpload(handler) {
     this._parentElement.addEventListener('submit', function (e) {
       e.preventDefault();
-      const dataArr = [...new FormData(this)]; // gives us an array that contains all the fields with their values
+      const dataArr = [...new FormData(this)]; // ! gives us an array that contains all the fields with their values
       const data = Object.fromEntries(dataArr);
       handler(data);
     });
@@ -41,4 +42,4 @@ class addRecipeView extends View {
 
   _generateMarkup() {}
 }
-export default new addRecipeView();
+export default new AddRecipeView();
