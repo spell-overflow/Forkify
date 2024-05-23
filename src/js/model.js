@@ -33,8 +33,7 @@ const createRecipeObject = function (data) {
 export const loadRecipe = async function (id) {
   try {
     const data = await getJSON(`${API_URL}${id}`);
-    state.recipe = createRecipeObject;
-    createRecipeObject(data);
+    state.recipe = createRecipeObject(data);
 
     if (state.bookmarks.some(bookmark => bookmark.id === id))
       state.recipe.bookmarked = true;
@@ -95,7 +94,6 @@ export const addBookmark = function (recipe) {
   if (recipe.id === state.recipe.id) state.recipe.bookmarked = true;
 
   persistBookmarks();
-  // console.log(recipe);
 };
 
 export const deleteBookmark = function (id) {
