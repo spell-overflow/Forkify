@@ -73,7 +73,7 @@ const controlServings = function (newServings) {
   // Update recipe view
   // recipeView.render(model.state.recipe);
   recipeView.update(model.state.recipe);
-  console.log(model.state.recipe);
+  // console.log(model.state.recipe);
 };
 
 const controlAddBookmark = function () {
@@ -99,13 +99,19 @@ const controlAddRecipe = async function (newRecipe) {
 
     // upload new recipe data
     await model.uploadRecipe(newRecipe);
-    console.log(model.state.recipe);
+    // console.log(model.state.recipe);
 
     // Render recipe
     recipeView.render(model.state.recipe);
 
     // Success message
     addRecipeView.renderMessage();
+
+    // Render bookmarkView
+    bookmarksView.render(model.state.bookmarks);
+
+    // Change ID in URL
+    window.history.pushState(null, '', `#${model.state.recipe.id}`);
 
     // close form window
     setTimeout(function () {
