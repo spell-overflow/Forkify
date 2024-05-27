@@ -33,7 +33,9 @@ class RecipeView extends View {
   _generateMarkup() {
     return `
         <figure class="recipe__fig">
-          <img src="${this._data.image}" alt="Tomato" class="recipe__img" />
+          <img src="${this._data.image}" alt="${
+      this._data.title
+    }" class="recipe__img" />
           <h1 class="recipe__title">
             <span>${this._data.title}</span>
           </h1>
@@ -95,7 +97,7 @@ class RecipeView extends View {
             ${this._data.ingredients
               .map(this._generateMarkupIngredient)
               .join('')}
-            </li>
+        </div>
 
         <div class="recipe__directions">
           <h2 class="heading--2">How to cook it</h2>
@@ -123,16 +125,17 @@ class RecipeView extends View {
   _generateMarkupIngredient(ing) {
     return `
     <li class="recipe__ingredient">
-    <svg class="recipe__icon">
-    <use href="${icons}#icon-check"></use>
-    </svg>
-    <div class="recipe__quantity">
+      <svg class="recipe__icon">
+        <use href="${icons}#icon-check"></use>
+      </svg>
+      <div class="recipe__quantity">
         ${ing.quantity ? new Fraction(ing.quantity).toString() : ''}
-        </div>
-    <div class="recipe__description">
+      </div>
+      <div class="recipe__description">
         <span class="recipe__unit">${ing.unit}</span>
         ${ing.description}
-    </div>`;
+      </div>
+    </li>`;
   }
 }
 
