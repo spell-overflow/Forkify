@@ -5,7 +5,7 @@
   "default": "index.html",
   "scripts": {
     "start": "rm -rf dist .parcel-cache; parcel index.html",
-    "build": "rm -rf dist .parcel-cache; parcel build index.html"
+    "build": "rm -rf dist .parcel-cache; parcel build index.html --dist-dir ./dist"
   },
   "author": "anneke hugenberg",
   "license": "ISC",
